@@ -1,0 +1,51 @@
+<div class="row text-center">
+  <div class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4">
+    <h3 class="text-warning">{{user.name}}</h3>
+    <p class="text-danger text-center">{{error}}</p>
+    <img class="center-block img-responsive img-rounded" ng-src="{{user.avatar_url}}" title="{{user.name}}">
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-xs-5 col-xs-offset-1 col-sm-3 col-sm-offset-2">
+    <a href="#/main" class="btn btn-default">&laquo; Search</a>
+  </div>
+  <div class="col-xs-6 col-sm-6">
+    <select name="sortOrder" ng-model="repoSortOrder" class="form-control">
+      <option value="+name">Name</option>
+      <option value="-stargazers_count">Stars</option>
+      <option value="+language">Language</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-10 col-sm-offset-1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Stars</th>
+          <th>Language</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="repo in repos | orderBy:repoSortOrder">
+          <td>
+            <a href="{{repo.html_url}}">
+          {{repo.name}}
+        </a>
+          </td>
+          <td>{{repo.stargazers_count | number}}</td>
+          <td>{{repo.language}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <h4 class="text-danger"><ng-pluralize count="repos.length" when="pluralizer"></ng-pluralize></h4>
+    
+  </div>
+</div>
+
+<hr>
+
